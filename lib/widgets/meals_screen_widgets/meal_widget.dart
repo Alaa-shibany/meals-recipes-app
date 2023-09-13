@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:meals_recipes/models/meal.dart';
+import 'package:meals_recipes/screens/meal_details_screen.dart';
 import 'package:meals_recipes/widgets/meals_screen_widgets/meal_widget_trait.dart';
 import 'package:transparent_image/transparent_image.dart';
 
 class MealWidget extends StatelessWidget {
-  const MealWidget({super.key, required this.meal});
+  const MealWidget({super.key, required this.meal, required this.onSelect});
 
   final Meal meal;
 
@@ -18,6 +19,8 @@ class MealWidget extends StatelessWidget {
         meal.affordability.name.substring(1);
   }
 
+  final void Function(Meal meal) onSelect;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,7 +31,7 @@ class MealWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => onSelect(meal),
         child: Stack(
           children: [
             FadeInImage(
