@@ -7,13 +7,15 @@ import '../models/category.dart';
 import '../models/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key, required this.onToggelFavorit});
+  const CategoriesScreen(
+      {super.key, required this.onToggelFavorit, required this.availabelMeals});
+  final List<Meal> availabelMeals;
 
   final void Function(Meal meal) onToggelFavorit;
 
   void _selectCategory(
       {required Category category, required BuildContext context}) {
-    final filterdMeals = dummyMeals
+    final filterdMeals = availabelMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
     Navigator.of(context).push(
