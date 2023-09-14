@@ -4,9 +4,12 @@ import 'package:meals_recipes/screens/meals_screen.dart';
 import 'package:meals_recipes/widgets/categories_screen_widgets/category_widget.dart';
 
 import '../models/category.dart';
+import '../models/meal.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.onToggelFavorit});
+
+  final void Function(Meal meal) onToggelFavorit;
 
   void _selectCategory(
       {required Category category, required BuildContext context}) {
@@ -15,8 +18,11 @@ class CategoriesScreen extends StatelessWidget {
         .toList();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) =>
-            MealsScreen(title: category.title, meals: filterdMeals),
+        builder: (context) => MealsScreen(
+          title: category.title,
+          meals: filterdMeals,
+          onToggelFavorit: onToggelFavorit,
+        ),
       ),
     );
   }
